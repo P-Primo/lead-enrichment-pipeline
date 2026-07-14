@@ -5,7 +5,7 @@ No third-party test runner required.
 """
 import unittest
 
-from src.reliability import (
+from src.services.reliability import (
     DeadLetterQueue,
     DedupRegistry,
     PermanentError,

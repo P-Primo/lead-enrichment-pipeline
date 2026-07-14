@@ -68,8 +68,8 @@ else lands in a terminal status (`duplicate`, `skipped`, `paused_api_limit`,
 
 ## The reliability layer (the interesting part)
 
-All of this lives in [`src/reliability.py`](src/reliability.py) and is exercised
-by the pipeline in [`src/pipeline.py`](src/pipeline.py).
+All of this lives in [`src/services/reliability.py`](src/services/reliability.py) and is
+exercised by the pipeline in [`src/controllers/pipeline.py`](src/controllers/pipeline.py).
 
 | Primitive | Problem it solves | Behaviour |
 |---|---|---|
@@ -224,21 +224,36 @@ lead-qualification pattern); only titles at or above `min_title_score` proceed t
 
 ---
 
-## Project structure
+## Project structure (MVC + services)
 
 ```
 lead-enrichment-pipeline/
-├── main.py                  # entry point + run summary
-├── config.json              # all runtime parameters (nothing hardcoded)
-├── data/raw_leads.csv       # synthetic input
+├── main.py                       # entry point — run pipeline, print CLI summary
+├── build_site.py                 # entry point — run pipeline, render the dashboard
+├── config.json                   # all runtime parameters (nothing hard-coded)
+├── data/raw_leads.csv            # synthetic input
+├── scripts/generate_leads.py     # regenerate the synthetic dataset
 ├── src/
-│   ├── models.py            # Lead, Stage, Status
-│   ├── reliability.py       # QuotaGate, retry, DLQ, dedup, rate limiter  ← core
-│   ├── providers.py         # mocked enrichment / verification / outreach APIs
-│   └── pipeline.py          # the 7-stage orchestrator
-├── tests/test_reliability.py# unit tests for the reliability layer
-└── output/                  # run artifacts (git-ignored)
+│   ├── models/
+│   │   └── lead.py               # Model — Lead, Stage, Status (the data)
+│   ├── controllers/
+│   │   └── pipeline.py           # Controller — orchestrates the 8-stage run
+│   ├── views/
+│   │   ├── site.py               # View — renders the static HTML dashboard
+│   │   └── console.py            # View — renders the CLI run summary
+│   └── services/
+│       ├── sourcing.py           # Instagram brand sourcing
+│       ├── providers.py          # mocked enrichment / verification / outreach APIs
+│       ├── reliability.py        # QuotaGate, retry, DLQ, dedup, rate limiter
+│       └── crm.py                # webhook-driven CRM funnel sync
+├── tests/test_reliability.py     # unit tests for the reliability layer
+├── site/index.html               # generated dashboard (served by Render)
+└── output/                       # run artifacts (git-ignored)
 ```
+
+**Layers:** the **controller** (`pipeline`) drives a run using the **services**
+(sourcing, providers, reliability, CRM) over the **model** (`lead`); the **views**
+(`site`, `console`) render the result. Entry points wire the layers together.
 
 ---
 

@@ -15,9 +15,9 @@ import os
 from collections import Counter, defaultdict
 from typing import Dict, List
 
-from .models import Lead, Stage, Status
-from .providers import EnrichmentProvider, OutreachProvider, VerificationProvider
-from .reliability import (
+from src.models.lead import Lead, Stage, Status
+from src.services.providers import EnrichmentProvider, OutreachProvider, VerificationProvider
+from src.services.reliability import (
     DeadLetterQueue,
     DedupRegistry,
     PermanentError,

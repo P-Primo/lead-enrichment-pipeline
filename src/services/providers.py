@@ -14,8 +14,8 @@ from __future__ import annotations
 
 import hashlib
 
-from .models import Lead
-from .reliability import PermanentError, TransientError
+from src.models.lead import Lead
+from src.services.reliability import PermanentError, TransientError
 
 
 def _unit(*parts: str) -> float:
