@@ -59,9 +59,9 @@ MECH_TIPS = {
         "Any record that errors is written to a dead-letter queue with its stage and "
         "reason, so it can be retried or investigated — never silently lost.",
     "title scoring":
-        "Each contact's job title is scored for role fit (influencer/partnerships rank "
-        "highest; ops/finance/engineering score zero). Only titles above the threshold "
-        "advance.",
+        "Each contact's job title is scored by decision-making authority — founders, VPs, "
+        "heads-of, and directors rank highest; interns, assistants, and support roles score "
+        "zero. Only titles above the threshold advance.",
     "per-company cap":
         "Limits how many contacts are queued per brand, so outreach isn't "
         "over-concentrated on a single company.",
@@ -75,14 +75,14 @@ MECH_TIPS = {
 
 # Role-fit scoring tiers (mirrors the pipeline's title-scoring rule).
 SCORE_TIERS = [
-    ("3", "st-good", "Strongest — owns influencer relationships",
-     "Influencer Marketing Manager"),
-    ("2", "st-series", "Strong — partnerships, creator, social, content",
-     "Head of Creator Partnerships · Social Media Manager · Content Lead · Community Manager"),
-    ("1", "st-warn", "General marketing fit",
-     "Brand Manager · PR &amp; Communications Manager · Growth Marketing Manager"),
-    ("0", "st-muted", "No fit — skipped",
-     "VP of Sales · Chief Financial Officer · Head of Engineering · Office Manager"),
+    ("3", "st-good", "Senior decision-maker / budget owner",
+     "Founder / CEO · VP of Marketing · Chief Marketing Officer · Head of Growth · Director"),
+    ("2", "st-series", "Manager or team lead — owns the function",
+     "Marketing Manager · Brand Manager · Growth Team Lead"),
+    ("1", "st-warn", "Individual contributor in the team",
+     "Marketing Analyst · Growth Coordinator · Communications Specialist"),
+    ("0", "st-muted", "No buying authority — skipped",
+     "Marketing Intern · Sales Assistant · Support Agent · Office Receptionist"),
 ]
 
 CSS = """
@@ -246,8 +246,8 @@ def _stepper(report, src):
         ("5", "Verify email <small>(paid)</small>", "Confirm each email address is deliverable.",
          f["verified"], f["enriched"] - f["verified"], "unverifiable emails skipped",
          ["quota gate", "retry + backoff"]),
-        ("6", "Score &amp; qualify", "Score each contact by role fit; keep only strong matches.",
-         f["scored"], f["verified"] - f["scored"], "low role-fit score skipped",
+        ("6", "Score &amp; qualify", "Score each contact by decision-making seniority; keep only strong matches.",
+         f["scored"], f["verified"] - f["scored"], "low-seniority roles skipped",
          ["title scoring"]),
         ("7", "Queue", "Order by score and cap the number of contacts per brand.",
          f["queued"], f["scored"] - f["queued"], "over per-company cap",
@@ -313,9 +313,9 @@ def _scoring_section():
         rows += (f'<tr><td><span class="pill {cls}">{score}</span></td>'
                  f'<td class="strong">{signal}</td><td>{examples}</td></tr>')
     return (
-        '<section><div class="h2">How leads are scored (role fit)</div>'
-        '<p class="sec-intro">At the qualify stage, each contact’s job title is scored 0–3 by how '
-        "directly it owns influencer/creator relationships. Only scores of 1 or higher advance, and "
+        '<section><div class="h2">How leads are scored (decision-making authority)</div>'
+        '<p class="sec-intro">At the qualify stage, each contact’s job title is scored 0–3 by how much '
+        "decision-making authority it holds over the buying decision. Only scores of 1 or higher advance, and "
         "higher scores are contacted first.</p>"
         '<div class="card"><div class="scroll"><table><thead><tr>'
         '<th>Score</th><th>What it signals</th><th>Example titles</th>'
@@ -426,7 +426,7 @@ def build_html(report, dls, leads, config):
 
     p.append(
         '<section><div class="h2">Sample of enriched leads</div>'
-        '<p class="sec-intro">A slice of the contacts the pipeline found, with the role-fit score it '
+        '<p class="sec-intro">A slice of the contacts the pipeline found, with the seniority score it '
         "assigned and what happened to each. “Contacted” were sent; “Queued” were deferred by "
         "the daily cap; “Skipped” didn’t meet the email or score bar.</p>"
         f'<div class="card"><div class="scroll"><table><thead><tr>'

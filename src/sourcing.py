@@ -1,9 +1,9 @@
 """Brand sourcing stage — discover brands from Instagram paid-partnership signals.
 
 This models the top of the funnel: creators disclose brand deals on Instagram in
-several ways, and we scan those posts to surface the brands actively working with
-influencers (the ones worth pitching). Deterministic and synthetic — for the demo
-only; no real scraping happens.
+several ways, and we scan those posts to surface the brands actively running
+creator campaigns (the ones worth pitching). Deterministic and synthetic — for the
+demo only; no real scraping happens.
 
 The signal sources are the realistic ways a paid partnership shows up on IG:
   * the official "Paid partnership with …" label

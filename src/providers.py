@@ -35,18 +35,21 @@ _LAST = ["Reed", "Nguyen", "Silva", "Kowalski", "Okafor", "Bianchi",
 
 # Titles span the full scoring range, including 0 (which gets filtered out).
 _TITLES = [
-    "Influencer Marketing Manager",
-    "Head of Creator Partnerships",
-    "Social Media Manager",
-    "Content Marketing Lead",
-    "Community Manager",
+    "Founder & CEO",
+    "Chief Marketing Officer",
+    "VP of Marketing",
+    "Head of Growth",
+    "Director of Marketing",
+    "Marketing Manager",
     "Brand Manager",
-    "PR & Communications Manager",
-    "Growth Marketing Manager",
-    "VP of Sales",
-    "Chief Financial Officer",
-    "Head of Engineering",
-    "Office Manager",
+    "Growth Team Lead",
+    "Marketing Analyst",
+    "Growth Coordinator",
+    "Communications Specialist",
+    "Marketing Intern",
+    "Sales Assistant",
+    "Support Agent",
+    "Office Receptionist",
 ]
 
 

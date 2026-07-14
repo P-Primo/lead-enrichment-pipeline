@@ -212,15 +212,15 @@ Try `"credits": 5` on enrichment to see the QuotaGate pause the run, or bump
 
 ## Lead scoring
 
-Contacts are scored on job-title signal (a common lead-qualification pattern);
-only titles at or above `min_title_score` proceed to outreach:
+Contacts are scored on job-title signal by **decision-making authority** (a common
+lead-qualification pattern); only titles at or above `min_title_score` proceed to outreach:
 
 | Score | Signal | Example titles |
 |---|---|---|
-| 3 | Strongest match | *Influencer Marketing Manager* |
-| 2 | Strong | *Head of Creator Partnerships*, *Social Media Manager*, *Content Lead* |
-| 1 | General fit | *Brand Manager*, *PR Manager*, *Growth Marketing* |
-| 0 | Skip | *VP Sales*, *CFO*, *Head of Engineering*, *Office Manager* |
+| 3 | Senior decision-maker / budget owner | *Founder / CEO*, *VP of Marketing*, *Chief Marketing Officer*, *Head of Growth*, *Director* |
+| 2 | Manager or team lead | *Marketing Manager*, *Brand Manager*, *Growth Team Lead* |
+| 1 | Individual contributor | *Marketing Analyst*, *Growth Coordinator*, *Communications Specialist* |
+| 0 | No buying authority — skipped | *Marketing Intern*, *Sales Assistant*, *Support Agent*, *Office Receptionist* |
 
 ---
 

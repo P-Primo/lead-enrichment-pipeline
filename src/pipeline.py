@@ -27,11 +27,11 @@ from .reliability import (
     with_retry,
 )
 
-# Title scoring — a strong signal wins. Mirrors a real lead-qualification rule.
+# Title scoring by decision-making authority — the most senior signal wins.
 _SCORE_KEYWORDS = {
-    3: ("influencer",),
-    2: ("partnership", "creator", "social", "content", "community", "collaboration"),
-    1: ("marketing", "brand", "pr", "communications", "growth"),
+    3: ("ceo", "founder", "owner", "president", "chief", "vp", "vice president", "head of", "director"),
+    2: ("manager", "lead", "principal"),
+    1: ("analyst", "coordinator", "specialist", "associate"),
 }
 
 
