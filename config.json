@@ -30,5 +30,9 @@
     "max_contacts_per_company": 3,
     "min_title_score": 1,
     "daily_outreach_cap": 40
+  },
+  "crm": {
+    "webhook_url": "https://crm.example.com/webhooks/lead-stage",
+    "sync_on_stage_change": true
   }
 }
