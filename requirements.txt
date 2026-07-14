@@ -1,0 +1,3 @@
+# No third-party dependencies.
+# This project runs on the Python 3.9+ standard library only.
+# Tests use the built-in `unittest` module:  python -m unittest discover -s tests
