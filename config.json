@@ -1,21 +1,21 @@
 {
   "providers": {
     "enrichment": {
-      "credits": 40,
+      "credits": 200,
       "cost_per_call": 1,
       "unit_cost_usd": 0.10,
       "transient_fail_rate": 0.25,
       "no_data_rate": 0.15
     },
     "verification": {
-      "credits": 40,
+      "credits": 200,
       "cost_per_call": 1,
       "unit_cost_usd": 0.02,
       "transient_fail_rate": 0.15,
       "invalid_rate": 0.20
     },
     "outreach": {
-      "credits": 100,
+      "credits": 200,
       "cost_per_call": 1,
       "unit_cost_usd": 0.00
     }
@@ -29,6 +29,6 @@
     "dedup_key": "domain",
     "max_contacts_per_company": 3,
     "min_title_score": 1,
-    "daily_outreach_cap": 15
+    "daily_outreach_cap": 40
   }
 }
